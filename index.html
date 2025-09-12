@@ -112,22 +112,30 @@
             font-size: 28px;
         }
 
-        .timeline {
-            position: relative;
+              .timeline {
+          position: relative;
+          padding-left: 60px; /* enough space on the left for the vertical line */
         }
-
+        
         .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: var(--accent-green);
-            border-radius: 2px;
+          content: '';
+          position: absolute;
+          left: 40px;  /* adjust horizontally */
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: var(--accent-green);
+          border-radius: 2px;
+          z-index: 0; /* make sure it's behind the content */
         }
-
-        .stage {
+        
+        .stage-content {
+          position: relative; 
+          z-index: 1;  /* make sure stage boxes are above the line */
+          margin-left: 40px; /* leave space on left so content doesn’t cover the line */
+        }
+        
+                .stage {
             display: flex;
             margin-bottom: 40px;
             align-items: center;
