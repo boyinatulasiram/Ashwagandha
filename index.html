@@ -394,6 +394,32 @@
             margin-top: 20px;
             font-size: 16px;
         }
+        :root {
+  --primary-green: #49a07d;
+  --accent-teal: #1abc9c;
+  --info-blue: #2c3e50;
+  --background-neutral: #f5f5f5;
+  --emergency-red: #e74c3c;
+  --success-green: #27ae60;
+}
+.hero {
+  background: linear-gradient(90deg, var(--primary-green) 60%, var(--accent-teal) 100%);
+  color: var(--background-neutral);
+  padding: 40px 20px;
+  border-radius: 16px;
+}
+.traceability-map { background: var(--background-neutral); border-radius: 16px; margin: 32px 0; }
+.card { 
+  background: white;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.09);
+  border-radius: 10px; padding: 20px; 
+  margin-bottom: 16px; 
+}
+.emergency-btn {
+  background: var(--emergency-red);
+  color: white;
+  border: none; border-radius: 25px;
+}
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
@@ -474,6 +500,13 @@
                         </div>
                     </div>
                 </div>
+                <!-- Example Map Section (using Mapbox Embed or Leaflet) -->
+                <section class="traceability-map">
+                  <h2>🌍 Product Journey Map</h2>
+                  <div id="productMap" style="height:400px;"></div>
+                  <!-- JS initializes map with custom pins and pop-ups for each stage (Farm, Labs, Manufacturing, Distribution) -->
+                </section>
+
 
                 <!-- Stage 2: Market Aggregation -->
                 <div class="stage">
