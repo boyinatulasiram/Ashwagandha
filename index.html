@@ -453,6 +453,8 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
 </head>
 <body>
     <div class="container">
@@ -481,6 +483,7 @@
         <!-- Journey Timeline -->
         <section class="journey">
             <h2>🌿 Your Product's Journey</h2>
+            
             <div class="timeline">
                 <!-- Stage 1: Farm Harvest -->
                 <div class="stage">
@@ -510,9 +513,13 @@
                 </div>
                 <!-- Example Map Section (using Mapbox Embed or Leaflet) -->
                 <section class="traceability-map">
-                  <h2>🌍 Product Journey Map</h2>
-                  <div id="productMap" style="height:400px;"></div>
-                  <!-- JS initializes map with custom pins and pop-ups for each stage (Farm, Labs, Manufacturing, Distribution) -->
+                    <h2>🌍 Product Journey Map</h2>
+                    <div id="productMap" style="height:400px; border-radius: 12px; overflow:hidden;"></div>
+                    <div style="text-align:center; margin-top:15px;">
+                        <button onclick="redirectGoogleMaps()" style="padding:10px 20px; background:#2E7D32; color:white; border:none; border-radius:8px; cursor:pointer;">
+                        📍 Open in Google Maps
+                        </button>
+                    </div>
                 </section>
 
 
@@ -811,8 +818,27 @@
             </p>
         </section>
     </div>
-
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+         // Initialize map
+    var map = L.map('productMap').setView([23.5, 78.5], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Locations
+    var locations = [
+      { name: "Farm - Neemuch", coords: [24.47, 75.08], link: "https://maps.google.com/?q=24.47,75.08" },
+      { name: "Market - Neemuch Mandi", coords: [24.47, 75.1], link: "https://maps.google.com/?q=24.47,75.1" },
+      { name: "Testing Lab - Pune", coords: [18.52, 73.85], link: "https://maps.google.com/?q=18.52,73.85" },
+      { name: "Manufacturing - Kerala", coords: [10.0, 76.3], link: "https://maps.google.com/?q=10.0,76.3" },
+      { name: "Distribution - Mumbai", coords: [19.07, 72.87], link: "https://maps.google.com/?q=19.07,72.87" }
+    ];
+
+    locations.forEach(loc => {
+      L.marker(loc.coords).addTo(map)
+        .bindPopup(`<b>${loc.name}</b><br><a href="${loc.link}" target="_blank">Open in Google Maps</a>`);
+    });
         // Add smooth scrolling for better UX
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -853,6 +879,60 @@
 
         // Add click handlers
         document.querySelector('.verify-btn').addEventListener('click', verifyBlockchain);
+        // Initialize map
+  var map = L.map('productMap').setView([23.5, 78.5], 5); // India center
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Product journey stages with coordinates
+  var stages = [
+    {
+      name: "Farm Harvest - Neemuch, MP",
+      coords: [24.47, 75.08],
+      desc: "🌱 Ramesh Patidar harvested 350kg organic Ashwagandha"
+    },
+    {
+      name: "Market Aggregation - Neemuch Mandi",
+      coords: [24.47, 75.15],
+      desc: "📦 Quality graded & batched at Mandi"
+    },
+    {
+      name: "Scientific Processing - Hyderabad",
+      coords: [17.385, 78.4867],
+      desc: "⚗️ Microwave drying at WHO-GMP facility"
+    },
+    {
+      name: "Laboratory Testing - Pune",
+      coords: [18.5204, 73.8567],
+      desc: "🧪 NABL certified lab testing"
+    },
+    {
+      name: "Manufacturing - Kerala",
+      coords: [10.8505, 76.2711],
+      desc: "🏭 Ayurvedic formulation at Kerala Ayurveda"
+    },
+    {
+      name: "Distribution - Mumbai",
+      coords: [19.076, 72.8777],
+      desc: "🚚 Pan-India distribution begins"
+    }
+  ];
+
+  // Add markers
+  stages.forEach(stage => {
+    L.marker(stage.coords).addTo(map)
+      .bindPopup(`<b>${stage.name}</b><br>${stage.desc}`);
+  });
+
+  // Redirect button function
+  function redirectGoogleMaps() {
+    window.open("https://www.google.com/maps/dir/Neemuch,MP/Hyderabad,Telangana/Pune,Maharashtra/Kerala/Mumbai,Maharashtra", "_blank");
+  }
+
     </script>
 </body>
 </html>
